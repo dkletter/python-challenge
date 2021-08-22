@@ -1,5 +1,4 @@
 # python-challenge
-Python homework
 
 Objective 1
 
