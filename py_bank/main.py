@@ -1,15 +1,8 @@
-# 1. total number of months in the dataset
-# 2. net total amount of "Profit/Losses" over the entire period
-# 3. calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
-# 4. greatest increase in profits (date and amount) over the entire period
-# 5. greatest decrease in profits (date and amount) over the entire period
-# 6. print the analysis to the terminal and export results to a text file
-
 # Import modules
 import os
 import csv
 
-# Path to collect data from the resources folder
+# Paths to collect and write data
 input_path = os.path.join('resources', 'budget_data.csv')
 output_path = os.path.join('analysis', 'pnl_analysis.txt')
 
@@ -56,9 +49,6 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
 
         # Add to the revenue_changes list
         revenue_changes.append(int(row[1]))
-
-    # Calculate the average
-    # revenue_avg = sum(revenue_changes) / len(revenue_changes)
     
     # Print output
     print()
