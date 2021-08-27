@@ -34,24 +34,22 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
     # Read through each row of data after the header
     for row in pnl_reader:
 
-        # Calculate the totals
+        # Calculate totals
         total_months = total_months + 1
         total_revenue = total_revenue + int(row[1])
-        # print(row)
-
+  
         # Keep track of changes
         revenue_change = int(row[1]) - prev_revenue
-        # print(revenue_change)
-
-        # Reset the value of prev_revenue to the row I completed my analysis
+   
+        # Reset the value of prev_revenue
         prev_revenue = int(row[1])
-        # print(prev_revenue)
-
-        # Determine the greatest increase
+    
+        # Determine greatest increase
         if (revenue_change > greatest_increase[1]):
             greatest_increase[1] = revenue_change
             greatest_increase[0] = row[0]
 
+        # Determine greatest decrease
         if (revenue_change < greatest_decrease[1]):
             greatest_decrease[1] = revenue_change
             greatest_decrease[0] = row[0]
@@ -59,10 +57,10 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
         # Add to the revenue_changes list
         revenue_changes.append(int(row[1]))
 
-    # Set the Revenue average
-    revenue_avg = sum(revenue_changes) / len(revenue_changes)
+    # Calculate the average
+    # revenue_avg = sum(revenue_changes) / len(revenue_changes)
     
-    # Show Output
+    # Print output
     print()
     print()
     print()
@@ -70,17 +68,17 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
     print("-------------------------")
     print("Total Months: " + str(total_months))
     print("Total Revenue: " + "$" + str(total_revenue))
-    print("Average Change: " + "$" + str(round(sum(revenue_changes) / len(revenue_changes),2)))
+    print("Average Change: " + "$" + str(round(sum(revenue_changes) / len(revenue_changes), 2)))
     print("Greatest Increase: " + str(greatest_increase[0]) + " ($" +  str(greatest_increase[1]) + ")") 
     print("Greatest Decrease: " + str(greatest_decrease[0]) + " ($" +  str(greatest_decrease[1]) + ")")
 
-# Output Files
+# Write output
 with open(output_path, "w") as txt_file:
     txt_file.write("Total Months: " + str(total_months))
     txt_file.write("\n")
     txt_file.write("Total Revenue: " + "$" + str(total_revenue))
     txt_file.write("\n")
-    txt_file.write("Average Change: " + "$" + str(round(sum(revenue_changes) / len(revenue_changes),2)))
+    txt_file.write("Average Change: " + "$" + str(round(sum(revenue_changes) / len(revenue_changes), 2)))
     txt_file.write("\n")
     txt_file.write("Greatest Increase: " + str(greatest_increase[0]) + " ($" + str(greatest_increase[1]) + ")") 
     txt_file.write("\n")
