@@ -40,7 +40,7 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
         pct_of_votes.append(round(num_of_votes.count(candidate)/total_votes*100,3))
     
     # Find the winner
-    winner = max(set(candidate_list), key=candidate.count)
+    winner = max(set(candidate_list), key=candidate_list.count)
  
     # Print the results
     print('Election Resuls')
