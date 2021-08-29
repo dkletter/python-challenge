@@ -51,9 +51,6 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
         revenue_changes.append(int(row[1]))
     
     # Print output
-    print()
-    print()
-    print()
     print("Financial Analysis")
     print("-------------------------")
     print("Total Months: " + str(total_months))
@@ -64,6 +61,10 @@ with open(input_path, 'r', encoding='utf8') as pnl_file:
 
 # Write output
 with open(output_path, "w") as txt_file:
+    txt_file.write("Financial Analysis")
+    txt_file.write("\n")
+    txt_file.write("----------------------------")
+    txt_file.write("\n")
     txt_file.write("Total Months: " + str(total_months))
     txt_file.write("\n")
     txt_file.write("Total Revenue: " + "$" + str(total_revenue))
