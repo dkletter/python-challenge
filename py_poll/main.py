@@ -12,8 +12,9 @@ output_path = os.path.join('resources', 'poll_analysis.txt')
 # 2 = Candidate
 
 # Create 
-candidates = []
-num_votes = []
+candidate_list = []
+candidate_count = []
+num_of_votes = []
 pct_of_votes = []
 
 # Initialize variables
@@ -36,26 +37,35 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
     # Read therough each row of data after the header
     for row in polling_reader:
 
-        # Add candidate names to the list of candidates
-        candidate = row[2]
-        candidates = 
-
-        # Spoiler, find the winner
-        winner = max(set(candidates), key=candidates.count)
-
         # Calculate total number of votes cast
-        total_votes = candidates.count(winner)
+        total_votes = total_votes + 1
 
-        print(f'The winner is {winner} with {total_votes} votes')
+        # Add each candidate name to the list of candidates
+        if row[2] not in candidate_list:
+            candidate_list.append(row[2])
+            
+        num_of_votes.append(row[2])
 
-        # Calculate percent of votes for each candidate
-        # pct_votes = round(int(candidates/total_votes), 2)
-        # pct_of_votes.append(pct_votes)
+    # Loop through each candidate and add the number of votes for each
+    for candidate in candidate_list:
+        candidate_count.append(num_of_votes.count(candidate))
+        pct_of_votes.append(round(num_of_votes.count(candidate)/total_votes*100,3))
+    
+    # Find the winner
+    winner = max(set(candidate_list), key=candidate_list.count)
+    # winner = candidate_list[num_of_votes.index(max(candidate_count))]
 
-        # Calculate the number of votes for each candidate
-        # num_of_votes = candidates + candidates + 1
+    # Print the results
+    print('Election Resuls')
+    print('-------------------------')
+    print(f'Total Votes: {total_votes}')
+    print('-------------------------')
+    for i in range(len(candidate_list)):
+        print(f'{candidate_list[i]}: {pct_of_votes[i]}% ({candidate_count[i]})')
+    print('-------------------------')
+    print(f'Winner: {winner}')
+    print('-------------------------')
 
-        # Find the winner
 
 
 
