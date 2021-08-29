@@ -4,14 +4,9 @@ import csv
 
 # Paths to collect and write data
 input_path = os.path.join('resources','election_data.csv')
-output_path = os.path.join('resources', 'poll_analysis.txt')
+output_path = os.path.join('analysis', 'poll_analysis.txt')
 
-# Rows
-# 0 = Voter ID
-# 1 = County
-# 2 = Candidate
-
-# Create 
+# Create lists to store data
 candidate_list = []
 candidate_count = []
 num_of_votes = []
@@ -19,13 +14,6 @@ pct_of_votes = []
 
 # Initialize variables
 total_votes = 0
-
-# Tasks:
-# 1. Total number of votes                      total_votes = total_votes + 1
-# 2. List of candidates                         candidates.append(row[2])
-# 3. Percent of votes for each candidate        (candidate_list/total_votes)*100
-# 4. Number of votes for each candidate         candidate_list = candidate_list + 1
-# 5. Winner                                     max(candidate_list)
 
 # Open and read csv
 with open(input_path, 'r', encoding='utf8') as polling_file:
@@ -52,7 +40,7 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
         pct_of_votes.append(round(num_of_votes.count(candidate)/total_votes*100,3))
     
     # Find the winner
-    winner = max(candidate_list)
+    winner = max(set(candidate_list), key=candidate.count)
  
     # Print the results
     print('Election Resuls')
@@ -65,13 +53,14 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
     print(f'Winner: {winner}')
     print('-------------------------')
 
+# Write the results to a file
 with open(output_path, "w") as txt_file:
     txt_file.write('Election Resuls')
     txt_file.write('\n-------------------------')
     txt_file.write(f'\nTotal Votes: {total_votes}')
     txt_file.write('\n-------------------------')
     for i in range(len(candidate_list)):
-        txt_file.write(f'{candidate_list[i]}: {pct_of_votes[i]}% ({candidate_count[i]})')
+        txt_file.write(f'\n{candidate_list[i]}: {pct_of_votes[i]}% ({candidate_count[i]})')
     txt_file.write('\n-------------------------')
-    txt_file.write(f'\Winner: {winner}')
+    txt_file.write(f'\nWinner: {winner}')
     txt_file.write('\n-------------------------')
