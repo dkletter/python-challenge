@@ -27,7 +27,7 @@ total_votes = 0
 # 4. Number of votes for each candidate         candidate_list = candidate_list + 1
 # 5. Winner                                     max(candidate_list)
 
-# One and read csv
+# Open and read csv
 with open(input_path, 'r', encoding='utf8') as polling_file:
     polling_reader = csv.reader(polling_file, delimiter=',')
 
@@ -52,9 +52,8 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
         pct_of_votes.append(round(num_of_votes.count(candidate)/total_votes*100,3))
     
     # Find the winner
-    winner = max(set(candidate_list), key=candidate_list.count)
-    # winner = candidate_list[num_of_votes.index(max(candidate_count))]
-
+    winner = max(candidate_list)
+ 
     # Print the results
     print('Election Resuls')
     print('-------------------------')
@@ -66,15 +65,13 @@ with open(input_path, 'r', encoding='utf8') as polling_file:
     print(f'Winner: {winner}')
     print('-------------------------')
 
-
-
-
-
-
-
-
-
-
-
-
-
+with open(output_path, "w") as txt_file:
+    txt_file.write('Election Resuls')
+    txt_file.write('\n-------------------------')
+    txt_file.write(f'\nTotal Votes: {total_votes}')
+    txt_file.write('\n-------------------------')
+    for i in range(len(candidate_list)):
+        txt_file.write(f'{candidate_list[i]}: {pct_of_votes[i]}% ({candidate_count[i]})')
+    txt_file.write('\n-------------------------')
+    txt_file.write(f'\Winner: {winner}')
+    txt_file.write('\n-------------------------')
